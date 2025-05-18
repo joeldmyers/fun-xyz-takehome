@@ -10,7 +10,7 @@ Step 3: Run `npm run dev`
 
 ## Notes
 
-The main page layout is found here: https://github.com/joeldmyers/fun-xyz-takehome/blob/main/src/app/page.tsx
+The main page code is found [here](https://github.com/joeldmyers/fun-xyz-takehome/blob/main/src/app/page.tsx).
 
 ### Choices made
 
