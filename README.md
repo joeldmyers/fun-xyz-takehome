@@ -23,4 +23,3 @@ Step 2: Run `npm run dev`
 - Improve mobile look/layout
 - Add CORS restriction on API for security reasons.
 - Improve the loading UI. Right now it hides the whole page. That's not a great UX. I would want it to show only for the piece of data that it's loading (here the one column)
-- Adjust the query stale time to get more "live loading" updates, refreshing every few seconds.
