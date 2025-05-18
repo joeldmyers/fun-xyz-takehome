@@ -1,0 +1,8 @@
+:global(.ant-card).loadingCardContainer {
+  min-height: 50vh;
+}
+
+.loader {
+  background: #fff;
+  top: 8rem;
+}

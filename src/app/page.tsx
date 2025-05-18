@@ -1,95 +1,92 @@
-import Image from "next/image";
+"use client";
+
+import "@ant-design/v5-patch-for-react-19";
+import { Card, Row } from "antd";
 import styles from "./page.module.css";
+import { useState } from "react";
+import { TOKENS } from "./consts";
+import { useGetAssetPrice } from "@/hooks/useGetAssetPrice";
+import { Token } from "./types";
+import { formatDollarAmount } from "./utils";
+import LoadingCard from "@/components/LoadingCard";
+import ErrorCard from "@/components/ErrorCard";
+import TokenSideSelector from "@/components/TokenSideSelector";
+import { TokenSide } from "@/components/TokenSideSelector/types";
+import TokenSelector from "@/components/TokenSelector";
+import TokenInfoColumn from "@/components/TokenInfoColumn";
+import DollarAmountColumn from "@/components/DollarAmountColumn";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [selectedTokenSide, setSelectedTokenSide] = useState<TokenSide>(
+    TokenSide.SOURCE
+  );
+  const [selectedSourceToken, setSelectedSourceToken] = useState<Token>(
+    TOKENS[0]
+  );
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const [selectedTargetToken, setSelectedTargetToken] = useState<Token>(
+    TOKENS[1]
+  );
+
+  const [dollarAmount, setDollarAmount] = useState<string>("$100");
+
+  const { data: sourcePriceInfo, status: sourcePriceStatus } =
+    useGetAssetPrice(selectedSourceToken);
+
+  const { data: targetPriceInfo, status: targetPriceStatus } =
+    useGetAssetPrice(selectedTargetToken);
+
+  const handleDollarAmountChange = (val: string) => {
+    const formattedValue = formatDollarAmount(val);
+    setDollarAmount(formattedValue);
+  };
+
+  if (sourcePriceStatus === "pending" || targetPriceStatus === "pending") {
+    return <LoadingCard />;
+  }
+
+  if (sourcePriceStatus === "error" || targetPriceStatus === "error") {
+    return <ErrorCard />;
+  }
+
+  return (
+    <Card className={styles.priceExplorerContainer}>
+      <h1 className={styles.priceExplorerHeader}>Token Price Explorer</h1>
+
+      <TokenSideSelector
+        selectedTokenSide={selectedTokenSide}
+        setSelectedTokenSide={setSelectedTokenSide}
+      />
+      <TokenSelector
+        selectedToken={
+          selectedTokenSide === TokenSide.SOURCE
+            ? selectedSourceToken
+            : selectedTargetToken
+        }
+        setSelectedToken={
+          selectedTokenSide === TokenSide.SOURCE
+            ? setSelectedSourceToken
+            : setSelectedTargetToken
+        }
+      />
+      <Row>
+        <TokenInfoColumn
+          dollarAmount={dollarAmount}
+          selectedTokenSide={TokenSide.SOURCE}
+          selectedToken={selectedSourceToken}
+          assetPriceInfo={sourcePriceInfo}
+        />
+        <DollarAmountColumn
+          handleDollarAmountChange={handleDollarAmountChange}
+          dollarAmount={dollarAmount}
+        />
+        <TokenInfoColumn
+          dollarAmount={dollarAmount}
+          selectedTokenSide={TokenSide.TARGET}
+          selectedToken={selectedTargetToken}
+          assetPriceInfo={targetPriceInfo}
+        />
+      </Row>
+    </Card>
   );
 }

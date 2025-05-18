@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fun.xyz Takehome | Joel Myers
 
-## Getting Started
+## Running Locally
 
-First, run the development server:
+Step 1: Run `npm i`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Step 2: Run `npm run dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Notes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Choices made
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- I used [Ant Design](https://ant.design/) to speed up UI development.
+- I put the API call behind the API so as not to expose the API key publicly. It still would need to be locked down more with CORS protection (see below)
+- I used [react-query](https://tanstack.com/query/latest/docs/framework/react/overview) to manage API calls.
+- I set this to refetch data every five seconds, so as to have it be more like a "live streaming" app. This would need discussion with product to consider tradeoffs (e.g., API call costs, rate limits)
 
-## Learn More
+### Things I would do if I had more tiime
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Add unit/UI tests with Jest and React Testing Library
+- Add some E2E tests using Playwright or Cypress
+- Add in more tokens. This used a const array of the four mentioned in the PDF. In the interest of time I did not add fetching from an API.
+- Improve mobile look/layout
+- Add CORS restriction on API for security reasons.
+- Improve the loading UI. Right now it hides the whole page. That's not a great UX. I would want it to show only for the piece of data that it's loading (here the one column)
+- Adjust the query stale time to get more "live loading" updates, refreshing every few seconds.

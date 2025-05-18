@@ -1,0 +1,13 @@
+.mainLayout {
+  min-height: 100vh;
+  max-width: 60rem;
+  margin: 5rem auto;
+  background: #fff;
+  text-align: center;
+}
+
+.mainHeader {
+  display: "flex";
+  align-items: "center";
+  background-color: "#dedede" !important;
+}
