@@ -4,7 +4,9 @@
 
 Step 1: Run `npm i`
 
-Step 2: Run `npm run dev`
+Step 2: create a .env.development file. Add `API_BASE_KEY=[Your Funkit API Key]`
+
+Step 3: Run `npm run dev`
 
 ## Notes
 
