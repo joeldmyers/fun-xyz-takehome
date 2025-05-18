@@ -27,3 +27,4 @@ Step 3: Run `npm run dev`
 - Improve the loading UI. Right now it hides the whole page. That's not a great UX. I would want it to show only for the piece of data that it's loading (here the one column)
 - I probably wouldn't have gone with the default CSS Module setup Next.js has. I like Styled Components but am flexible on other approaches (Tailwind etc.)
 - If there were more pages and these components were not shared across pages, I would consider putting these components within the main app folder rather than in the shared components folder. Using a component library (Ant Design) made it less necessary for me to create shared components.
+- I'd add commas to numbers to make them more readable.
