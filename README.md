@@ -1,5 +1,7 @@
 # Fun.xyz Takehome | Joel Myers
 
+To view this on the web, [click here](https://fun-xyz-takehome-git-main-joeldmyers-projects.vercel.app/).
+
 ## Running Locally
 
 Step 1: Run `npm i`
