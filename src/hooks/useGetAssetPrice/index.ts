@@ -15,7 +15,7 @@ export const getAssetPrice = async ({
 
 export const useGetAssetPrice = ({ chainId, symbol }: Token) => {
   return useQuery({
-    queryKey: ["sourceAssetPrice", chainId, symbol],
+    queryKey: ["assetPrice", chainId, symbol],
     queryFn: () => getAssetPrice({ chainId, symbol }),
   });
 };
