@@ -25,3 +25,4 @@ Step 3: Run `npm run dev`
 - Improve mobile look/layout
 - Add CORS restriction on API for security reasons.
 - Improve the loading UI. Right now it hides the whole page. That's not a great UX. I would want it to show only for the piece of data that it's loading (here the one column)
+- I probably wouldn't have gone with the default CSS Module setup Next.js has. I like Styled Components but am flexible on other approaches (Tailwind etc.)
