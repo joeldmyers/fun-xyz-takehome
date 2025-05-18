@@ -34,4 +34,3 @@ The main page code is found [here](https://github.com/joeldmyers/fun-xyz-takehom
 - If there were more pages and these components were not shared across pages, I would consider putting these components within the main app folder rather than in the shared components folder. Using a component library (Ant Design) made it less necessary for me to create shared components.
 - I'd add commas to numbers to make them more readable.
 - I'd tighten up types, including ensuring return types on all methods.
-- I might consider
