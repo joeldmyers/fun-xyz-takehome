@@ -20,6 +20,7 @@ The main page code is found [here](https://github.com/joeldmyers/fun-xyz-takehom
 - I put the API call behind the API so as not to expose the API key publicly. It still would need to be locked down more with CORS protection (see below)
 - I used [react-query](https://tanstack.com/query/latest/docs/framework/react/overview) to manage API calls.
 - I set this to refetch data every five seconds, so as to have it be more like a "live streaming" app. This would need discussion with product to consider tradeoffs (e.g., API call costs, rate limits)
+- I set up the dollar input in the middle. This wasn't in the wireframe, but I was following "They need a simple tool to select two tokens (a source and a target) and input a USD amount" from the PDF.
 
 ### Things I would do if I had more time
 
@@ -33,3 +34,4 @@ The main page code is found [here](https://github.com/joeldmyers/fun-xyz-takehom
 - If there were more pages and these components were not shared across pages, I would consider putting these components within the main app folder rather than in the shared components folder. Using a component library (Ant Design) made it less necessary for me to create shared components.
 - I'd add commas to numbers to make them more readable.
 - I'd tighten up types, including ensuring return types on all methods.
+- I might consider
