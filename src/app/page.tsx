@@ -38,7 +38,9 @@ export default function Home() {
 
   const handleDollarAmountChange = (val: string) => {
     const formattedValue = formatDollarAmount(val);
-    setDollarAmount(formattedValue);
+    if (formattedValue) {
+      setDollarAmount(formattedValue);
+    }
   };
 
   if (sourcePriceStatus === "pending" || targetPriceStatus === "pending") {
